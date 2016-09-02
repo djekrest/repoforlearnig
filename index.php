@@ -31,8 +31,8 @@
             $sql = 'SELECT * FROM products ORDER BY id DESC';
             foreach ($pdo->query($sql) as $row) {
                 echo '<tr>';
-                echo '<td>'. $row['name'] . '</td>';
-                echo '<td>'. $row['description'] . '</td>';
+                echo '<td>' . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8')  . '</td>';
+                echo '<td>' . htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8') . '</td>';
                 echo '<td width=250>';
                 echo '<a class="btn btn-success" href="edits.php?id='.$row['id'].'">Update</a>';
                 echo ' ';
@@ -48,3 +48,4 @@
 </div> <!-- /container -->
 </body>
 </html>
+
