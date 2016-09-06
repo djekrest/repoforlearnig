@@ -11,30 +11,35 @@
     require 'configs/db_access.php';
 
     if ( !empty($_POST)) {
-        // keep track validation errors
+
         $nameError = null;
         $descriptionError = null;
+        $name = null;
+        $description = null;
 
 
-        // keep track post values
-        $name = $_POST['name'];
-        $description = $_POST['description'];
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
 
-
-        // validate input
         $valid = true;
-        if (empty($name)) {
+        if (empty($_POST["name"])) {
             $nameError = 'Please enter Name';
             $valid = false;
+        } else{
+            $name = test_input($_POST["name"]);
         }
 
-        if (empty($description)) {
+        if (empty($_POST['description'])) {
             $descriptionError = 'Please enter description';
             $valid = false;
+        } else {
+            $description = test_input($_POST['description']);
         }
 
-
-        // insert data
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,7 +53,6 @@
     ?>
 
 </head>
-
 <body>
 
 <div class="container">
