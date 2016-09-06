@@ -35,6 +35,10 @@ if ( !empty($_POST)) {
         $valid = false;
     } else{
         $name = test_input($_POST["name"]);
+        if (strlen($name) > 255){
+            $nameError = 'Name is too long (Max count 255)';
+            $valid = false;
+        }
     }
 
     if (empty($_POST['description'])) {
@@ -42,6 +46,10 @@ if ( !empty($_POST)) {
         $valid = false;
     } else {
         $description = test_input($_POST['description']);
+        if (strlen($description) > 255){
+            $descriptionError = 'Description is too long (Max count 255)';
+            $valid = false;
+        }
     }
 
 
